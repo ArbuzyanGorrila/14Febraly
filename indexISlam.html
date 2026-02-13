@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>u</title>
+
+<style>
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#ffd6e7,#fff0f6);
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    text-align:center;
+}
+
+.screen{display:none;animation:fade .6s ease;}
+.active{display:block;}
+
+h1{font-size:26px;margin-bottom:15px;}
+p{font-size:16px;}
+
+button{
+    margin:10px;
+    padding:12px 28px;
+    border:none;
+    border-radius:30px;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.pink{
+    background:#ff4f87;
+    color:white;
+    box-shadow:0 4px 15px rgba(255,79,135,.4);
+}
+
+.gray{
+    background:#eee;
+}
+
+button:hover{
+    transform:scale(1.07);
+}
+
+/* ГАЛЕРЕЯ */
+.photo-gallery{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin:15px 0;
+}
+
+.photo-gallery img{
+    width:160px;
+    height:200px;
+    object-fit:cover;
+    border-radius:18px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.15);
+    transition:.3s;
+}
+
+.photo-gallery img:hover{
+    transform:scale(1.05);
+}
+
+.heart{
+    position:absolute;
+    animation:float 6s linear infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(100vh);opacity:0;}
+    50%{opacity:1;}
+    100%{transform:translateY(-10vh);opacity:0;}
+}
+
+@keyframes fade{
+    from{opacity:0;transform:scale(.9);}
+    to{opacity:1;transform:scale(1);}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Экран 1 -->
+<div class="screen active" id="screen1">
+    <h1>💌 Котёнок, у меня для тебя письмо...</h1>
+    <button class="pink" onclick="start()">Далее →</button>
+</div>
+
+<!-- Экран 2 -->
+<div class="screen" id="screen2">
+    <h1>🐾 Откроешь? </h1>
+    <button class="pink" onclick="next(3)">Открыть</button>
+    <button class="gray" onclick="tryAgain()">Не-а</button>
+</div>
+
+<!-- Экран 3 -->
+<div class="screen" id="screen3">
+    <h1>❤️ С Днём Святого Валентина, хот сучка!💋</h1>
+    <p>Нажми кнопку ниже 💕</p>
+    <button class="pink" onclick="next(4)">Далее 💖</button>
+</div>
+
+<!-- Экран 4 -->
+<div class="screen" id="screen4">
+    <h1>Для тебя 🥹💞</h1>
+
+    <div class="photo-gallery">
+        <img src="c:\Users\рюк\Downloads\photo_5224498867578017874_y.jpg " >
+        <img src="c:\Users\рюк\Downloads\photo_5224498867578017872_y.jpg" >
+        <img src="c:\Users\рюк\Downloads\photo_5224498867578017873_y.jpg" >
+        <img src="c:\Users\рюк\Downloads\photo_5224498867578017875_y.jpg" >
+        <img src="c:\Users\рюк\Downloads\photo_5224498867578017877_y.jpg" >
+    </div>
+
+    <p>
+        Котёнок,  
+        пусть твоя улыбка всегда сияет ярче звёзд ✨  
+        Пусть каждый день будет наполнен теплом,  
+        радостью и любовью 💖  
+        Ты заслуживаешь самого лучшего 🥰
+    </p>
+</div>
+
+<script>
+function start(){
+    document.getElementById("bgMusic").play();
+    next(2);
+}
+
+function next(num){
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    document.getElementById('screen'+num).classList.add('active');
+}
+
+function tryAgain(){
+    alert("Подумай еще раз! ");
+}
+
+function createHeart(){
+    const heart=document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML="💖";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*20+15)+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+}
+
+setInterval(createHeart,400);
+</script>
+
+</body>
+</html>
